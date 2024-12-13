@@ -76,15 +76,15 @@ int intInputHandler();
 int main()
 {
 
-while(exitProgram==false) {
-    topMenu();
+while(exitProgram==false) {//loops the top level menu function until user exits
+    topMenu();//Function for menu
 }
 
 }
 void topMenu() {
-    cout <<"Welcome to the Main Menu "<<endl;
-    menuItem=intInputHandler();
-    switch (menuItem) {
+    cout <<"Welcome to the Main Menu "<<endl;//Outputs greeting 
+    menuItem=intInputHandler();//calls integer input 
+    switch (menuItem) {//Selects submenu
         case(1):
             func1();//PlaceholderNames
             break;
@@ -103,6 +103,7 @@ void topMenu() {
         case(6):
             cout <<"Have a Nice Rest of the Day!"<<endl;
             exitProgram=true;
+        break;
         default:
             cout << "Sorry! That is not a valid menu option. Please enter number from 1-6"<< endl;
     }
