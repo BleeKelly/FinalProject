@@ -9,7 +9,7 @@ private:
     int userID;
     string name, location;
 public:
-    //Set Methods to allow modification of user attributes
+    //Set Methods to allow modification of user attributes.
     void setUserID(int ID) {
         userID=ID;
     }
@@ -73,7 +73,7 @@ public:
     bool getIsAssigned() {
         return isAssigned;
     }
-    string getStringIsAssigned() {
+    string getStringIsAssigned() {//Allows for system to produce a output that can be used in the string section
         string output;
         if(isAssigned==true) {
             output = "Yes";
@@ -90,8 +90,7 @@ private:
     string dest;
 public:
     // Constructor
-    Trip(int tID, int rID, int dID, string destT) : tripID(tID), riderID(rID), driverID(dID), dest(destT){}
-
+    Trip(int tID, int rID, int dID, string destT) : tripID(tID), riderID(rID), driverID(dID), dest(destT){}//Constructor to allow for the creation of trip in one swoop rather than individual setter functions
     // Getter functions
     int getTripID() const { return tripID; }
     int getRiderID() const { return riderID; }
@@ -102,26 +101,26 @@ public:
 //Global Variables//
 int menuItem;
 bool exitProgram = false;
-int nextDriverID = 200; // global var for tracking Driver ID
-int nextRiderID = 100; // global var for tracking Rider ID
-int nextTripID = 0; // global var counter for Trip ID
+int nextDriverID = 200; // User ID tracker. We wish for driver ids to start in the 200s
+int nextRiderID = 100; // User ID tracker. We wish for rider ids to start in the 100s
+int nextTripID = 0; // Trip ID tracker. We wish for trip ids to start in the 00s
 //Function Declaration
-void topMenu();
-string stringInputHandler();
-int intInputHandler();
-void registerDriver();
+void topMenu();//Menu to allow for selection of other features
+string stringInputHandler();//Handles sanitization and checking of all user-input strings
+int intInputHandler();//Handles sanitization and checking of all user-input integers
+void registerDriver();///Function to register one or more drivers
 vector<Driver> driverList; // storage for multiple driver objects
-void registerRider();
+void registerRider();//Function to register one or more riders.
 vector<Rider> riderList; // storage for multiple rider objects
-void displayDriver();
-void displayRider();
-void requestRide();
+void displayDriver();//Displays all registered drivers
+void displayRider();//Displays all registered riders
+void requestRide();// Allows for administrator to match drivers to riders and create trips
 vector<Trip> tripList; // storage for multiple trips
-void displayTrips();
+void displayTrips();//Displays all in progress trips.
 
 
 int main() {
-while(exitProgram==false) {
+while(exitProgram==false) {//Runs until program is exited
     topMenu();
 }
 
@@ -152,16 +151,16 @@ void topMenu() {
         break;
         case(7):
             cout <<"Have a Nice Rest of the Day!"<<endl;
-            exitProgram=true;
+            exitProgram=true;//Sets flag to exit program
         break;
-        default:
+        default://If the user selects an option not on the menu we will inform them and rerun the menu.
             cout << "Sorry! That is not a valid menu option. Please enter number from 1-7"<< endl;
     }
     cout << "--------------------------\n";
 }
 //Overloaded Input Handlers
 string stringInputHandler() {
-    bool valid_input;
+    bool valid_input;//Variable to store if input is valid
     string output;
     do  {
         valid_input=true;
@@ -182,7 +181,7 @@ string stringInputHandler() {
         //Clears input buffer
         cin.clear();//Clears input buffer: https://stackoverflow.com/questions/22122337/while-loop-skipping-cin
         cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    }while (valid_input == false);
+    }while (valid_input == false);//Repeats until valid input is passed.
     return output;
 }
 int intInputHandler() {
@@ -331,7 +330,7 @@ void requestRide() {
     // Check if rider exists
     bool riderFound = false;
     int riderInd;
-    for (size_t i = 0; i < riderList.size(); ++i) {
+    for (size_t i = 0; i < riderList.size(); i++) {
         if (riderList[i].getUserID() == riderID) {
             riderFound = true;
             rideDestintation = riderList[i].getDestination();
@@ -376,7 +375,7 @@ void requestRide() {
         return;
     }
 
-    for (size_t i = 0; i < driverList.size(); ++i) {
+    for (size_t i = 0; i < driverList.size(); i++) {
         if (driverList[i].getUserID() == driverID) {
             driverList[i].setIsAssigned(true); // Mark the driver as assigned
             break;
